@@ -12,6 +12,10 @@
 		EBB1C7461B9633A60011F5C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7441B9633A60011F5C3 /* Main.storyboard */; };
 		EBB1C7481B9633A60011F5C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7471B9633A60011F5C3 /* Images.xcassets */; };
 		EBB1C74B1B9633A60011F5C3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7491B9633A60011F5C3 /* LaunchScreen.xib */; };
+		EFEBF32A1FDE6207005893F1 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEBF3291FDE6207005893F1 /* Story.swift */; };
+		EFEBF32C1FDE62A7005893F1 /* StoryBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEBF32B1FDE62A7005893F1 /* StoryBank.swift */; };
+		EFEBF3311FDE87D6005893F1 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEBF32F1FDE87D5005893F1 /* ProgressHUD.m */; };
+		EFEBF3321FDE87D6005893F1 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFEBF3301FDE87D5005893F1 /* ProgressHUD.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,12 @@
 		EBB1C7451B9633A60011F5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBB1C7471B9633A60011F5C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EBB1C74A1B9633A60011F5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EFEBF3291FDE6207005893F1 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		EFEBF32B1FDE62A7005893F1 /* StoryBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBank.swift; sourceTree = "<group>"; };
+		EFEBF32D1FDE87D4005893F1 /* Destini-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Destini-Bridging-Header.h"; sourceTree = "<group>"; };
+		EFEBF32E1FDE87D5005893F1 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		EFEBF32F1FDE87D5005893F1 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		EFEBF3301FDE87D5005893F1 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +75,11 @@
 		EBB1C73E1B9633A60011F5C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EFEBF3301FDE87D5005893F1 /* ProgressHUD.bundle */,
+				EFEBF32E1FDE87D5005893F1 /* ProgressHUD.h */,
+				EFEBF32F1FDE87D5005893F1 /* ProgressHUD.m */,
 				EBB1C73F1B9633A60011F5C3 /* Info.plist */,
+				EFEBF32D1FDE87D4005893F1 /* Destini-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -92,6 +106,8 @@
 		EFEBF3281FDE6176005893F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EFEBF3291FDE6207005893F1 /* Story.swift */,
+				EFEBF32B1FDE62A7005893F1 /* StoryBank.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -128,7 +144,8 @@
 				TargetAttributes = {
 					EBB1C73A1B9633A60011F5C3 = {
 						CreatedOnToolsVersion = 6.4;
-						LastSwiftMigration = 0900;
+						DevelopmentTeam = ND8N624BT5;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -155,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFEBF3321FDE87D6005893F1 /* ProgressHUD.bundle in Resources */,
 				EBB1C7461B9633A60011F5C3 /* Main.storyboard in Resources */,
 				EBB1C74B1B9633A60011F5C3 /* LaunchScreen.xib in Resources */,
 				EBB1C7481B9633A60011F5C3 /* Images.xcassets in Resources */,
@@ -168,8 +186,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFEBF32A1FDE6207005893F1 /* Story.swift in Sources */,
 				EBB1C7431B9633A60011F5C3 /* ViewController.swift in Sources */,
+				EFEBF3311FDE87D6005893F1 /* ProgressHUD.m in Sources */,
 				EBB1C7411B9633A60011F5C3 /* AppDelegate.swift in Sources */,
+				EFEBF32C1FDE62A7005893F1 /* StoryBank.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,11 +319,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = ND8N624BT5;
 				INFOPLIST_FILE = Destini/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourName.Destini;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RadoslavRadoev.Destini;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Destini/Destini-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
@@ -312,11 +337,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = ND8N624BT5;
 				INFOPLIST_FILE = Destini/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourName.Destini;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RadoslavRadoev.Destini;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Destini/Destini-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
