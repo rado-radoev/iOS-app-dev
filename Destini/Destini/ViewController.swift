@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
+    @IBOutlet weak var resetButton: UIButton!       // Has TAG = 3
     
     let allStories = StoryBank()
     var storyNumber : Int = 1
@@ -22,9 +23,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()      
         
+        resetButton.isHidden = true
         updateUI()
     }
-
+    
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -33,19 +35,23 @@ class ViewController: UIViewController {
     
         setStoryNumber(currentStory, sender)
         
-
         if !checkEndOfGame(currentStory) {
             updateUI()
+        }
+        
+        if sender.tag == 3 {
+            restartGame()
         }
         
     }
     
     func checkEndOfGame(_ currentStory : Story) -> Bool {
-        if (currentStory.answer1Link == nil ||
-            currentStory.answer1Text == "") {
+        if ((currentStory.answer1Link == nil && currentStory.answer2Link == nil) ||
+            (currentStory.answer1Text == "" && currentStory.answer2Text == "")) {
             topButton.isHidden = true
-            bottomButton.setTitle("End Game", for: .normal)
-            ProgressHUD.showSuccess("Game Over")
+            bottomButton.isHidden = true
+            resetButton.isHidden = false
+            //ProgressHUD.showSuccess("Game Over")
             return true
         }
         
@@ -55,6 +61,8 @@ class ViewController: UIViewController {
     func restartGame() {
        // ProgressHUD.show("Let's start over!")
         topButton.isHidden = false
+        bottomButton.isHidden = false
+        resetButton.isHidden = true
         storyNumber = 1
         updateUI()
     }
