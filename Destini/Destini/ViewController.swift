@@ -20,13 +20,16 @@ class ViewController: UIViewController {
     let allStories = StoryBank()
     var storyNumber : Int = 1
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()      
-        
-        resetButton.isHidden = true
-        updateUI()
+
+        restartGame()
     }
     
+    @IBAction func restartPressed(_ sender: UIButton) {
+        restartGame()
+    }
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -34,18 +37,15 @@ class ViewController: UIViewController {
         let currentStory : Story = getStory(storyNumber)
     
         setStoryNumber(currentStory, sender)
-        
-        if !checkEndOfGame(currentStory) {
-            updateUI()
-        }
-        
-        if sender.tag == 3 {
-            restartGame()
-        }
-        
+        updateUI()
+
     }
     
     func checkEndOfGame(_ currentStory : Story) -> Bool {
+        if !currentStory.storyText.isEmpty {
+            storyTextView.text = currentStory.storyText
+        }
+        
         if ((currentStory.answer1Link == nil && currentStory.answer2Link == nil) ||
             (currentStory.answer1Text == "" && currentStory.answer2Text == "")) {
             topButton.isHidden = true
@@ -96,10 +96,7 @@ class ViewController: UIViewController {
                 return value
             }
         }
-        
         return nil
     }
-
-
 }
 
