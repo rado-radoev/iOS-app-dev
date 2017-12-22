@@ -27,14 +27,20 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     
     
-    @IBAction func `switch`(_ sender: UISwitch) {
+    @IBAction func toggle (_ sender: UISwitch) {
+        let currentTemp = temperatureLabel.text!
+        let lastIndex = currentTemp.index(currentTemp.endIndex, offsetBy: -1)
+        let temp = Int(String(currentTemp[...lastIndex]))
+        
         
         if sender.isOn {
             farenLabel.text = "℃"
-            print("switch is on")
+            temperatureLabel.text = "\(convertFahrenheitToCelcius(temperature: temp!))°"
+            //print("switch is on")
         } else {
             farenLabel.text = "℉"
-            print("switch is off")
+            temperatureLabel.text = "\(convertCelciusToFahrenheit(temperature : temp!))°"
+            //print("switch is off")
         }
     }
     
@@ -87,8 +93,18 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //MARK: - UI Updates
     func updateUIWithWeather() {
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = "\(weatherDataModel.temperature)"
+        temperatureLabel.text = "\(weatherDataModel.temperature)°"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+    }
+    
+    func convertCelciusToFahrenheit(temperature : Int) -> Int {
+        let fahrenheit = ((temperature * 9) / 5) + 32
+        return fahrenheit
+    }
+    
+    func convertFahrenheitToCelcius(temperature : Int) -> Int {
+        let celcius = ((temperature - 32) * 5) / 9
+        return celcius
     }
     
     //MARK: - Location Manager Delegate Methods
