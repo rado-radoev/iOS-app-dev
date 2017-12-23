@@ -28,18 +28,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     
     @IBAction func toggle (_ sender: UISwitch) {
-        let currentTemp = temperatureLabel.text!
-        let lastIndex = currentTemp.index(currentTemp.endIndex, offsetBy: -1)
-        let temp = Int(String(currentTemp[...lastIndex]))
-        
-        
+
         if sender.isOn {
             farenLabel.text = "℃"
-            temperatureLabel.text = "\(convertFahrenheitToCelcius(temperature: temp!))°"
+            temperatureLabel.text = "\(weatherDataModel.temperature)°"
             //print("switch is on")
         } else {
             farenLabel.text = "℉"
-            temperatureLabel.text = "\(convertCelciusToFahrenheit(temperature : temp!))°"
+            temperatureLabel.text = "\(convertCelciusToFahrenheit(temperature : weatherDataModel.temperature))°"
             //print("switch is off")
         }
     }
