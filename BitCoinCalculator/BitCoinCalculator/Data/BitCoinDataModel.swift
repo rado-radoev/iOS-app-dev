@@ -9,7 +9,8 @@
 import UIKit
 
 class BitCoinDataModel {
-    var btcAmount : Decimal = 0.0
-    var usdAmount : Decimal = 0.0
-    var btcRate : Decimal = 0.0
+    var btcAmount : Double = 0.0
+    var usdAmount : Double = 0.0
+    var btcRate : Double = 0.0
+    let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD"
 }

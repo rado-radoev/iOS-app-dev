@@ -11,21 +11,16 @@ import SwiftyJSON
 import Alamofire
 
 class ViewController: UIViewController {
-    
-    let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC"
-    let currencyArray = ["USD"]
-    let currencyIcon = ["$"]
-    var finalURL = ""
 
     @IBOutlet weak var btcTextField: UITextField!
     @IBOutlet weak var usdTextField: UITextField!
-
+    @IBOutlet weak var btcValueLabel: UILabel!
     
     let bitcoinDataModel = BitCoinDataModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        getCurrencyData(url: bitcoinDataModel.baseURL)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,34 +29,18 @@ class ViewController: UIViewController {
     }
 
     @IBAction func calculateButton(_ sender: UIButton) {
+        convertUSDtoBTC()
     }
     
-    //MARK: UIPickerView delegate methods
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currencyArray.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currencyArray[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        exchangeRateDataModel.currencyIcon = currencyIcon[row]
-        finalURL = baseURL + currencyArray[row]
-        getCurrencyData(url: finalURL)
-        //print(finalURL)
-    }
     
     //MARK: - Parsing JSON
     func updateExchangeRate(json : JSON) {
         
-        let rate = json["last"].doubleValue
-        
-        //bitcoinPriceLabel.text = exchangeRateDataModel.currencyIcon + " " + String(rate)
+        bitcoinDataModel.btcRate = json["ask"].doubleValue
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        let formatted = formatter.string(from: NSNumber(value: bitcoinDataModel.btcRate))
+        btcValueLabel.text = "$ \(formatted ?? "0.00")"
     }
     
     //MARK: - Network Process Data
@@ -76,20 +55,24 @@ class ViewController: UIViewController {
                 self.updateExchangeRate(json: bitcoinJSON)
             } else {
                 print("Error: \(String(describing: response.result.error))")
-                self.bitcoinPriceLabel.text = "Connection Issues"
+                self.btcValueLabel.text = "Connection Issues"
             }
         }
     }
     
     //MARK: - Currency Convertion
-    func convertBTCtoUSD(bitcoin: Decimal) -> Decimal {
-        
-        return 0.0
+    func convertBTCtoUSD() {
+        if !btcTextField.text!.isEmpty {
+            bitcoinDataModel.btcAmount = NSString(string: btcTextField.text!).doubleValue
+            usdTextField.text = String(bitcoinDataModel.btcAmount * bitcoinDataModel.btcRate)
+        }
     }
     
-    func convertUSDtoBTC(usd: Decimal) -> Decimal {
-        
-        return 0.0
+    func convertUSDtoBTC() {
+        if !usdTextField.text!.isEmpty {
+            bitcoinDataModel.usdAmount = NSString(string: usdTextField.text!).doubleValue
+            btcTextField.text = String(bitcoinDataModel.btcRate / bitcoinDataModel.usdAmount)
+        }
     }
 }
 
