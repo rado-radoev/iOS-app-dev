@@ -10,26 +10,62 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITextFieldDelegate {
+    
+    //MARK: - Setup label and text field outlets
     @IBOutlet weak var btcTextField: UITextField!
     @IBOutlet weak var usdTextField: UITextField!
     @IBOutlet weak var btcValueLabel: UILabel!
     
+    //MARK: - Set up variables
     let bitcoinDataModel = BitCoinDataModel()
-
+    let pasteboard = UIPasteboard.general
+    
+    //MARK: - On Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getCurrencyData(url: bitcoinDataModel.baseURL)
+        
+        if let string = pasteboard.string {
+            btcTextField.text = string
+        }
+        
+        btcTextField.clearsOnBeginEditing = true
+        btcTextField.keyboardType = .numbersAndPunctuation
+         btcTextField.delegate = self
+        
+        usdTextField.clearsOnBeginEditing = true
+        usdTextField.keyboardType = .numbersAndPunctuation
+        usdTextField.delegate = self
+    }
+    
+    //MARK: - Keyboard overrides
+    // close keyboard when return is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        btcTextField.resignFirstResponder()
+        usdTextField.resignFirstResponder()
+        return true
+    }
+    
+    // close keyboard when pressed outside
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    //MARK: - Button actions
     @IBAction func calculateButton(_ sender: UIButton) {
-        convertUSDtoBTC()
+        if btcTextField.text!.isEmpty {
+          convertUSDtoBTC()
+        }
+        else {
+            convertBTCtoUSD()
+        }
     }
     
     
@@ -71,7 +107,7 @@ class ViewController: UIViewController {
     func convertUSDtoBTC() {
         if !usdTextField.text!.isEmpty {
             bitcoinDataModel.usdAmount = NSString(string: usdTextField.text!).doubleValue
-            btcTextField.text = String(bitcoinDataModel.btcRate / bitcoinDataModel.usdAmount)
+            btcTextField.text = String(bitcoinDataModel.usdAmount / bitcoinDataModel.btcRate)
         }
     }
 }
