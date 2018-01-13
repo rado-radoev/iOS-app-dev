@@ -192,7 +192,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         do {
            try Auth.auth().signOut()
             
-           guard ( navigationController?.popToRootViewController(animated: true)) != nil
+           navigationController?.popToRootViewController(animated: true)
             
         } catch {
             print("Error signing out!")

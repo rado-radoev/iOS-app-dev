@@ -36,10 +36,10 @@ class LogInViewController: UIViewController {
             }
             else {
                 print("login successful")
-                
+                SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToChat", sender: self)
             }
-            SVProgressHUD.dismiss()
+            
         }
         
     }
